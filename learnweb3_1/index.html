@@ -23,8 +23,66 @@
         margin: 10px 0px 5px 0px;
       }
     </style>
+
+    
   </head>
   <body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script>
+      const MoodContractAddress = "0x03d14E98f12D4d834498E662Ed8f964Fe5671959";
+      const MoodContractABI = [
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_mood",
+              "type": "string"
+            }
+          ],
+          "name": "setMood",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getMood",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+      let MoodContract;
+      let signer;
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "ropsten");
+      provider.send("eth_requestAccounts", []).then(() => {
+      provider.listAccounts().then((accounts) => {
+        signer = provider.getSigner(accounts[0]);
+        MoodContract = new ethers.Contract(
+          MoodContractAddress,
+          MoodContractABI,
+          signer
+          );
+        });
+      });
+      async function getMood() {
+        const getMoodPromise = MoodContract.getMood();
+        const Mood = await getMoodPromise;
+        console.log(Mood);
+      }
+
+      async function setMood() {
+        const mood = document.getElementById("mood").value;
+        const setMoodPromise = MoodContract.setMood(mood);
+        await setMoodPromise;
+      }
+    </script>
     <div>
       <h1>This is my dApp!</h1>
       <p>Here we can set or get the mood:</p>
