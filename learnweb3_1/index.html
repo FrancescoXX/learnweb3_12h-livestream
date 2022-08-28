@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First dApp</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    
+      div {
+        width: 20%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+      }
+    
+      button {
+        width: 100%;
+        margin: 10px 0px 5px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>This is my dApp!</h1>
+      <p>Here we can set or get the mood:</p>
+      <label for="mood">Input Mood:</label> <br />
+      <input type="text" id="mood" />
+      <button onclick="getMood()">Get Mood</button>
+      <button onclick="setMood()">Set Mood</button>
+    </div>
+  </body>
+</html>
